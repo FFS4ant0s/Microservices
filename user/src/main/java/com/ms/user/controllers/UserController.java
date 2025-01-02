@@ -1,5 +1,6 @@
 package com.ms.user.controllers;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,8 @@ public class UserController {
 
     @PostMapping("/users")
     public ResponseEntity<UserModel> saveUser(@ResquestBody @Valid UserRecordDto userRecordDto) {
+        var UserModel = new UserModel();
+        BeanUtils.copyProperties(userRecordDto, UserModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
